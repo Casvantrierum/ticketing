@@ -1,0 +1,23 @@
+name: deploy-auth
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: 
+      - master
+    paths: 
+      - 'auth/**'
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd auth && docker docker build -t casvt/auth .
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: ${{ DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ DOCKER_PASSWORD }}
+      - run: docker push casvt/auth
