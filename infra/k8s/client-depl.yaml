@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: us.gcr.io/ticketing-317420/client
+          image: casvt/client
 ---
 apiVersion: v1
 kind: Service
